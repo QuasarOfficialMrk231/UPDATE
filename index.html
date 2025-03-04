@@ -1,1 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Тест: Гей ли ты?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f3f3f3;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .question {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: none;
+            background-color: #3498db;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        #result {
+            margin-top: 30px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <h1>Шуточный тест: Гей ли ты?</h1>
 
+    <div class="question">
+        <p>Какой твой любимый цвет?</p>
+        <button onclick="showResult('Любой цвет прекрасен!')">Радужный</button>
+        <button onclick="showResult('Ты просто любишь стиль!')">Чёрный</button>
+        <button onclick="showResult('Ты обожаешь природу!')">Зелёный</button>
+    </div>
+
+    <div class="question">
+        <p>Какой твой идеальный вечер?</p>
+        <button onclick="showResult('Ты знаешь толк в веселье!')">В клубе</button>
+        <button onclick="showResult('Тебе важен уют!')">Дома с чаем и книгой</button>
+        <button onclick="showResult('Ты любишь приключения!')">На прогулке с друзьями</button>
+    </div>
+
+    <div class="question">
+        <p>Кто твой любимый певец?</p>
+        <button onclick="showResult('Ты точно знаешь, как зажигать!')">Lady Gaga</button>
+        <button onclick="showResult('Ты уважаешь классику!')">Freddie Mercury</button>
+        <button onclick="showResult('Ты ценишь хорошие тексты!')">Баста</button>
+    </div>
+
+    <div id="result"></div>
+
+    <script>
+        function showResult(text) {
+            document.getElementById('result').textContent = text;
+        }
+    </script>
+</body>
+</html>
