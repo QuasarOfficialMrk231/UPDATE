@@ -22,7 +22,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         button {
-            margin-top: 20px;
+            margin-top: 10px;
             padding: 10px 20px;
             border: none;
             background-color: #3498db;
@@ -40,37 +40,89 @@
             font-weight: bold;
             color: #e74c3c;
         }
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
     <h1>Шуточный тест: Гей ли ты?</h1>
 
-    <div class="question">
-        <p>Какой твой любимый цвет?</p>
-        <button onclick="showResult('Любой цвет прекрасен!')">Радужный</button>
-        <button onclick="showResult('Ты просто любишь стиль!')">Чёрный</button>
-        <button onclick="showResult('Ты обожаешь природу!')">Зелёный</button>
+    <div id="quiz">
+        <div class="question" id="q1">
+            <p>Какой твой любимый цвет?</p>
+            <button onclick="nextQuestion(1, 2)">Радужный</button>
+            <button onclick="nextQuestion(0, 2)">Чёрный</button>
+            <button onclick="nextQuestion(0, 2)">Зелёный</button>
+        </div>
+
+        <div class="question hidden" id="q2">
+            <p>Какой твой идеальный вечер?</p>
+            <button onclick="nextQuestion(1, 3)">В клубе</button>
+            <button onclick="nextQuestion(0, 3)">Дома с книгой</button>
+            <button onclick="nextQuestion(0, 3)">На прогулке с друзьями</button>
+        </div>
+
+        <div class="question hidden" id="q3">
+            <p>Кто твой любимый певец?</p>
+            <button onclick="nextQuestion(1, 4)">Lady Gaga</button>
+            <button onclick="nextQuestion(1, 4)">Freddie Mercury</button>
+            <button onclick="nextQuestion(0, 4)">Баста</button>
+        </div>
+
+        <div class="question hidden" id="q4">
+            <p>Какой фильм ты выберешь?</p>
+            <button onclick="nextQuestion(1, 5)">Call Me by Your Name</button>
+            <button onclick="nextQuestion(0, 5)">Бойцовский клуб</button>
+            <button onclick="nextQuestion(0, 5)">Форсаж</button>
+        </div>
+
+        <div class="question hidden" id="q5">
+            <p>Какая у тебя любимая одежда?</p>
+            <button onclick="nextQuestion(1, 6)">Яркие трендовые образы</button>
+            <button onclick="nextQuestion(0, 6)">Спортивный костюм</button>
+            <button onclick="nextQuestion(0, 6)">Классика: джинсы и футболка</button>
+        </div>
+
+        <div class="question hidden" id="q6">
+            <p>Какой танец ты предпочитаешь?</p>
+            <button onclick="nextQuestion(1, 7)">Вогинг</button>
+            <button onclick="nextQuestion(0, 7)">Хип-хоп</button>
+            <button onclick="nextQuestion(0, 7)">Я не танцую</button>
+        </div>
     </div>
 
-    <div class="question">
-        <p>Какой твой идеальный вечер?</p>
-        <button onclick="showResult('Ты знаешь толк в веселье!')">В клубе</button>
-        <button onclick="showResult('Тебе важен уют!')">Дома с чаем и книгой</button>
-        <button onclick="showResult('Ты любишь приключения!')">На прогулке с друзьями</button>
-    </div>
-
-    <div class="question">
-        <p>Кто твой любимый певец?</p>
-        <button onclick="showResult('Ты точно знаешь, как зажигать!')">Lady Gaga</button>
-        <button onclick="showResult('Ты уважаешь классику!')">Freddie Mercury</button>
-        <button onclick="showResult('Ты ценишь хорошие тексты!')">Баста</button>
-    </div>
-
-    <div id="result"></div>
+    <div id="result" class="hidden"></div>
 
     <script>
-        function showResult(text) {
-            document.getElementById('result').textContent = text;
+        let score = 0;
+
+        function nextQuestion(points, nextId) {
+            score += points;
+
+            // Скрыть все вопросы
+            const questions = document.querySelectorAll('.question');
+            questions.forEach(q => q.classList.add('hidden'));
+
+            // Показать следующий вопрос или результат
+            if (nextId <= questions.length) {
+                document.getElementById('q' + nextId).classList.remove('hidden');
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.classList.remove('hidden');
+            
+            if (score >= 5) {
+                resultDiv.textContent = "Ты абсолютно гей! Радуга всегда с тобой!";
+            } else if (score >= 3) {
+                resultDiv.textContent = "Ты немного гей. В тебе живёт дух свободы!";
+            } else {
+                resultDiv.textContent = "Ты не гей. Но никогда не поздно попробовать что-то новое!";
+            }
         }
     </script>
 </body>
