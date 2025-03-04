@@ -30,6 +30,9 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
+            display: block;
+            width: 200px;
+            margin: 10px auto;
         }
         button:hover {
             background-color: #2980b9;
@@ -53,6 +56,7 @@
             <p>Какой твой любимый цвет?</p>
             <button onclick="nextQuestion(1, 2)">Радужный</button>
             <button onclick="nextQuestion(0, 2)">Чёрный</button>
+            <button onclick="nextQuestion(0, 2)">Синий</button>
             <button onclick="nextQuestion(0, 2)">Зелёный</button>
         </div>
 
@@ -61,6 +65,7 @@
             <button onclick="nextQuestion(1, 3)">В клубе</button>
             <button onclick="nextQuestion(0, 3)">Дома с книгой</button>
             <button onclick="nextQuestion(0, 3)">На прогулке с друзьями</button>
+            <button onclick="nextQuestion(0, 3)">Просмотр сериалов</button>
         </div>
 
         <div class="question hidden" id="q3">
@@ -68,6 +73,7 @@
             <button onclick="nextQuestion(1, 4)">Lady Gaga</button>
             <button onclick="nextQuestion(1, 4)">Freddie Mercury</button>
             <button onclick="nextQuestion(0, 4)">Баста</button>
+            <button onclick="nextQuestion(0, 4)">Эд Ширан</button>
         </div>
 
         <div class="question hidden" id="q4">
@@ -75,13 +81,15 @@
             <button onclick="nextQuestion(1, 5)">Call Me by Your Name</button>
             <button onclick="nextQuestion(0, 5)">Бойцовский клуб</button>
             <button onclick="nextQuestion(0, 5)">Форсаж</button>
+            <button onclick="nextQuestion(0, 5)">Матрица</button>
         </div>
 
         <div class="question hidden" id="q5">
             <p>Какая у тебя любимая одежда?</p>
             <button onclick="nextQuestion(1, 6)">Яркие трендовые образы</button>
             <button onclick="nextQuestion(0, 6)">Спортивный костюм</button>
-            <button onclick="nextQuestion(0, 6)">Классика: джинсы и футболка</button>
+            <button onclick="nextQuestion(0, 6)">Джинсы и футболка</button>
+            <button onclick="nextQuestion(0, 6)">Классический костюм</button>
         </div>
 
         <div class="question hidden" id="q6">
@@ -89,6 +97,23 @@
             <button onclick="nextQuestion(1, 7)">Вогинг</button>
             <button onclick="nextQuestion(0, 7)">Хип-хоп</button>
             <button onclick="nextQuestion(0, 7)">Я не танцую</button>
+            <button onclick="nextQuestion(0, 7)">Тектоник</button>
+        </div>
+
+        <div class="question hidden" id="q7">
+            <p>Что бы ты выбрал на десерт?</p>
+            <button onclick="nextQuestion(1, 8)">Эклер с розовой глазурью</button>
+            <button onclick="nextQuestion(0, 8)">Шоколадный торт</button>
+            <button onclick="nextQuestion(0, 8)">Фрукты</button>
+            <button onclick="nextQuestion(0, 8)">Пицца</button>
+        </div>
+
+        <div class="question hidden" id="q8">
+            <p>Какую музыку ты слушаешь?</p>
+            <button onclick="nextQuestion(1, 9)">Поп</button>
+            <button onclick="nextQuestion(0, 9)">Рок</button>
+            <button onclick="nextQuestion(0, 9)">Рэп</button>
+            <button onclick="nextQuestion(0, 9)">Классика</button>
         </div>
     </div>
 
@@ -100,11 +125,9 @@
         function nextQuestion(points, nextId) {
             score += points;
 
-            // Скрыть все вопросы
             const questions = document.querySelectorAll('.question');
             questions.forEach(q => q.classList.add('hidden'));
 
-            // Показать следующий вопрос или результат
             if (nextId <= questions.length) {
                 document.getElementById('q' + nextId).classList.remove('hidden');
             } else {
@@ -116,13 +139,16 @@
             const resultDiv = document.getElementById('result');
             resultDiv.classList.remove('hidden');
             
-            if (score >= 5) {
-                resultDiv.textContent = "Ты абсолютно гей! Радуга всегда с тобой!";
-            } else if (score >= 3) {
-                resultDiv.textContent = "Ты немного гей. В тебе живёт дух свободы!";
+            let resultText = "";
+            if (score >= 6) {
+                resultText = "Ты абсолютно гей! Радуга всегда с тобой!";
+            } else if (score >= 4) {
+                resultText = "Ты немного гей. В тебе живёт дух свободы!";
             } else {
-                resultDiv.textContent = "Ты не гей. Но никогда не поздно попробовать что-то новое!";
+                resultText = "Ты не гей. Но никогда не поздно попробовать что-то новое!";
             }
+            
+            resultDiv.innerHTML = `Ответ: ${resultText}`;
         }
     </script>
 </body>
